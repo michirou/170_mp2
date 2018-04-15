@@ -119,6 +119,12 @@ class ExactSum(Constraint):
 		# check if sum of values is the target sum
 		# dont test if not all vars assigned
 		# return True / False
+		total_sum = 0
+
+		for val in values:
+			total_sum  += val
+
+		return total_sum == self.target_sum
 
 ### Magic Series Constraints ###
 
@@ -133,6 +139,12 @@ class MagicSeries(Constraint):
 		# Example: if 2 is assigned to index 1, there must be two 1s in the series
 		# dont test if not all vars assigned 
 		# return True / False
+		
+		for i, val in enumerate(values):
+			if values.count(i) != val:
+				return False
+
+		return True
 
 ### Knapsack Constraints ###
 
@@ -150,6 +162,12 @@ class KnapsackCapacity(Constraint):
 		# check that total weight of items included in solution doesn't exceed capacity
 		# return True / False
 		total_weight = 0
+
+		for sol in solution:
+			if solution[sol] == 1:
+				total_weight += sol.weight
+
+		return total_weight <= self.capacity
 		
 
 ### Vertex Cover Constraints ###
@@ -170,3 +188,18 @@ class VertexCover(Constraint):
 		# dont test if not all vars assigned 
 		# return True / False
 		active_vertices = []
+		count = 0
+
+		for sol in solution:
+			if solution[sol] == 1:
+				active_vertices.append(sol);
+
+		for active in active_vertices:
+			for edge in self.edges:
+				if active not in edge:
+					count+=1
+			if count == len(self.edges):
+				return False
+
+		return True
+
