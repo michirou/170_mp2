@@ -30,8 +30,8 @@ def problem(N):
 	# 1) Different number per square
 	# INSERT CODE HERE
 	varb = []
-	for y in range(N+1):
-		for x in range(N+1):
+	for y in range(N):
+		for x in range(N):
 			varb.append('%d,%d'%(y,x))
 	c = AllDifferent(varb,magic_sum);
 	c.name = 'AllDiff'
@@ -41,9 +41,9 @@ def problem(N):
 	# Note: separate constraint for each column
 	# INSERT CODE HERE
 	varb = []
-	for y in range(N+1):
+	for y in range(N):
 		varb = []
-		for x in range(N+1):
+		for x in range(N):
 			varb.append('%d,%d'% (y,x))
 		
 		c = ExactSum(varb,magic_sum)
@@ -56,9 +56,9 @@ def problem(N):
 
 	varb = []
 	
-	for y in range(N+1):
+	for y in range(N):
 		varb = []
-		for x in range(N+1):
+		for x in range(N):
 			varb.append('%d,%d'% (x,y))
 		
 		c = ExactSum(varb,magic_sum)
@@ -68,7 +68,7 @@ def problem(N):
 	# e.g. (0,0), (1,1), ..., (N-1,N-1)
 	# INSERT CODE HERE
 	varb = []
-	for y in range(N+1):
+	for y in range(N):
 		varb.append('%d,%d'% (y,y))
 
 	c = ExactSum(varb,magic_sum)
@@ -79,8 +79,8 @@ def problem(N):
 	# e.g. N = 3, (0,2), (1,1), (2,0)
 	# INSERT CODE HERE
 	varb = []
-	for x in range(N+1):
-		varb.append('%d,%d'% (x,(N-x)))
+	for x in range(N):
+		varb.append('%d,%d'% (x,(N-x-1)))
 	c = ExactSum(varb,magic_sum)
 	c.name = 'Exact Sum:Backward Diagonal'
 	constraints.append(c)
