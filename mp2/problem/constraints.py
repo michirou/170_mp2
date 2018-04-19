@@ -119,23 +119,11 @@ class ExactSum(Constraint):
 		# check if sum of values is the target sum
 		# dont test if not all vars assigned
 		# return True / False
-		#------------COMMENTED OUT BY CHIN2--------
-		# total_sum = 0
-
-		# for val in values:
-		# 	total_sum  += val
-
-		# return total_sum == self.target_sum
-		#------------COMMENTED OUT BY CHIN2--------
-
 		var_sum = 0
-		if len(variables) == len(values):	
+		if len(self.variables) == len(values):	
 			for x in values:
-				val_sum += x
-			if val_sum == target_sum:
-				return True
-			else:
-				return False
+				var_sum += x
+			return var_sum == self.target_sum
 		return True
 
 ### Magic Series Constraints ###
