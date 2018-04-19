@@ -163,9 +163,9 @@ class KnapsackCapacity(Constraint):
 		# return True / False
 		total_weight = 0
 
-		for sol in solution:
-			if solution[sol] == 1:
-				total_weight += sol.weight
+		for var in self.variables:
+			if solution[var] == 1:
+				total_weight += var.weight
 
 		return total_weight <= self.capacity
 		
@@ -190,16 +190,13 @@ class VertexCover(Constraint):
 		active_vertices = []
 		count = 0
 
-		for sol in solution:
-			if solution[sol] == 1:
-				active_vertices.append(sol);
+		for var in self.variables:
+			if solution[var] == 1:
+				active_vertices.append(var)
 
-		for active in active_vertices:
-			for edge in self.edges:
-				if active not in edge:
-					count+=1
-			if count == len(self.edges):
-				return False
-
-		return True
-
+		for edge in self.edges:
+			for active in active_vertices:
+				if active in edge:
+					count += 1
+					break
+		return count == len(self.edges)
