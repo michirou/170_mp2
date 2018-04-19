@@ -128,11 +128,11 @@ class ExactSum(Constraint):
 		# return total_sum == self.target_sum
 		#------------COMMENTED OUT BY CHIN2--------
 
-		var_sum = 0
-		if len(variables) == len(values):	
+		val_sum = 0
+		if len(self.variables) == len(values):	
 			for x in values:
 				val_sum += x
-			if val_sum == target_sum:
+			if val_sum == self.target_sum:
 				return True
 			else:
 				return False
