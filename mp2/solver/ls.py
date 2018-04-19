@@ -165,6 +165,7 @@ class StochasticLocalSearchSolver(LocalSearchSolver):
 		legal_neighbor_count = 0
 		best_state = state
 		while True:
+			print("\n\niteration count = ", iteration)
 			if iteration > config.max_iterations:
 				print('Iteration: %d -- LIMIT REACHED' % iteration)
 				break
@@ -180,9 +181,12 @@ class StochasticLocalSearchSolver(LocalSearchSolver):
 				
 				print('\t',i+1,str(neighbor.score).ljust(5),neighbor.solution)
 				neighbor_count += 1
+
+				print("neigbor count->", neighbor_count)
 				if config.compare_fn(state,neighbor):
 					legal_neighbor = neighbor
 					legal_neighbor_count += 1
+					print("legal_neighbor_count ->", legal_neighbor_count)
 					break
 
 			if legal_neighbor is None:
