@@ -40,12 +40,25 @@ def knapsack_objective(state):
 	""" Total value of items inside knapsack based on solution """
 	problem = state.problem
 	solution = state.solution
+	score = 0
+	solutions = []
+	for value in solution:
+		if problem.find_hard_violation(value):
+			score = 0
+			break
+
+		else:
+			score += 1
+			
+	# violation = problem.find_hard_violation(solution)
+	# print("violation is: ")
+	# print(violation)
 
 	# INSERT CODE HERE
 	# If solution violates hard constraint, score should be 0 (invalid) -- worst score for max
 	# Hint: use problem.find_hard_violation
 	# Compute total value of items included in knapsack based on the solution
-
+	return score
 
 def vertex_cover_objective(state): 
 	""" Number of vertices used in solution """

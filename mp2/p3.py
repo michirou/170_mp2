@@ -25,6 +25,7 @@ def test1():
 
     generator_name = 'change2'
     # generator_name = 'swap2'
+    print(generator_name)
 
     if generator_name == 'change2':
         config.neighbor_generator = change_upto_two_values_generator
