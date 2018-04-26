@@ -119,33 +119,13 @@ class ExactSum(Constraint):
 		# check if sum of values is the target sum
 		# dont test if not all vars assigned
 		# return True / False
-
-		#------------COMMENTED OUT BY CHIN2--------
-		# total_sum = 0
-
-		# for val in values:
-		# 	total_sum  += val
-
-		# return total_sum == self.target_sum
-		#------------COMMENTED OUT BY CHIN2--------
-
-		val_sum = 0
+		var_sum = 0
 		if len(self.variables) == len(values):	
 			for x in values:
-				val_sum += x
-			if val_sum == self.target_sum:
-				return True
-			else:
-				return False
-#-----------COMMENTED OUT BY CHIN2----------------
-		# var_sum = 0
-		# if len(self.variables) == len(values):	
-		# 	for x in values:
-		# 		var_sum += x
-		# 	return var_sum == self.target_sum
+				var_sum += x
+			return var_sum == self.target_sum
+		return True
 
-		# return True
-#------------COMMENTED OUT BY CHIN2---------------
 ### Magic Series Constraints ###
 
 class MagicSeries(Constraint):
@@ -183,12 +163,11 @@ class KnapsackCapacity(Constraint):
 		# return True / False
 		total_weight = 0
 
-		for var in self.variables:
-			if solution[var] == 1:
-				total_weight += var.weight
+		for key, item in solution.items():
+			if item:
+				total_weight += key.weight
 
 		return total_weight <= self.capacity
-		
 
 ### Vertex Cover Constraints ###
 
@@ -210,13 +189,16 @@ class VertexCover(Constraint):
 		active_vertices = []
 		count = 0
 
-		for var in self.variables:
-			if solution[var] == 1:
-				active_vertices.append(var)
+		if len(solution.keys()) != len(self.variables):
+			return True
+		else:
+			for key, item in solution.items():
+				if item:
+					active_vertices.append(key)
 
-		for edge in self.edges:
-			for active in active_vertices:
-				if active in edge:
-					count += 1
-					break
-		return count == len(self.edges)
+			for edge in self.edges:
+				for active in active_vertices:
+					if active in edge:
+						count += 1
+						break
+			return count == len(self.edges)
