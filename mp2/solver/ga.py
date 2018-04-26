@@ -135,6 +135,12 @@ class GeneticSolver:
 		self.best_score = best_state.score
 		self.iterations = iteration
 
+	def get_best_score(self):
+		return self.best_score
+
+	def get_iterations(self):
+		return self.iterations
+
 	def initialize_population(self):
 		if self.config.explain: print('Initializing population...')
 		config = self.config
