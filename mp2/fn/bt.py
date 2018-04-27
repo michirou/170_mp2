@@ -73,14 +73,32 @@ def custom_value_ordering(state,variable):
 	# Hint: you will use state.copy() for new_state, use new_state.assign, and use forward_checking() on new_state
 	# Count the number of filtered values by comparing the total from current state and new_state
 
-	pairValue = {}
-	finalDomain = []
-	for value in domain:
-		new_state = state.copy()
-		new_state.assign(value, variable)
-		for var  in problem.unassigned_variables(new_state.solution):
-			forward_checking(new_state, var)
-	return domain
+	temp = dict()
+	valueCount = []
+	newStateCount = 0
+	stateCount = 0
+
+	if(len(domain) != 0):
+		for dom,value in state.domain.items():
+			stateCount = stateCount + len(value)
+
+		for value in domain:
+			new_state = state.copy()
+			new_state.assign(variable, value)
+			forward_checking(new_state, variable)
+
+			for dom,value in new_state.domain.items():
+				newStateCount = newStateCount + len(value)
+
+			valueCount.append(newStateCount)
+
+		checker = [stateCount - val for val in valueCount]
+
+		for index,dom in enumerate(domain):
+			temp[dom] = checker[index]
+
+		return sorted(temp, key=temp.get)
+	return default_order(state,variable)
 	
 ### FILTERING FUNCTIONS ###
 
