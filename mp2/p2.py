@@ -45,15 +45,15 @@ def test1():
 
 def test2():
     # problem_name = 'plants'
-    # problem_name = 'einstein'
+    problem_name = 'einstein'
     # problem_name = 'magic_square'
-    problem_name = 'magic_series'
+    # problem_name = 'magic_series'
 
     # neighborhood_name = 'change1'
-    # neighborhood_name = 'change2'
+    neighborhood_name = 'change2'
     # neighborhood_name = 'swap2'
     # neighborhood_name = 'min_conflict'
-    neighborhood_name = 'max_min_conflict'
+    # neighborhood_name = 'max_min_conflict'
 
     config = common_config()
     config.objective_fn = count_violations
@@ -117,16 +117,16 @@ def test3():
     display_solutions(problem,solver)
 
 def test4():
-    # problem_name = 'plants'
+    problem_name = 'plants'
     # problem_name = 'einstein'
     # problem_name = 'magic_square'
     # problem_name = 'magic_series'
     # problem_name = 'knapsack'
-    problem_name   = 'vertex_cover'
+    # problem_name   = 'vertex_cover'
 
-    # solver_name = 'hill_climb'
+    solver_name = 'hill_climb'
     # solver_name = 'hill_walk'
-    solver_name = 'random_walk'
+    # solver_name = 'random_walk'
 
     problem = select_problem(problem_name)
     config = common_config()
@@ -164,10 +164,10 @@ def test5():
     # problem_name,test_case = 'vertex_cover',3
     problem_name,test_case = 'vertex_cover',5
 
-    tenure = 0
+    # tenure = 0
     # tenure = 3
     # tenure = 5
-    # tenure = 7
+    tenure = 7
 
     
     config = common_config()
@@ -261,7 +261,7 @@ if __name__ == '__main__':
     import time
     start = time.time()
 
-    test = 5
+    test = 4
 
     if test == 1:
         test1()

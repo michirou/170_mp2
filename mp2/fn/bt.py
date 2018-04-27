@@ -20,11 +20,29 @@ def custom_variable_selector(state):
 	problem = state.problem
 	solution = state.solution
 	domain = state.domain 
-
+	print(problem)
+	print(domain)
+	print(solution)
 	# INSERT CODE HERE
 	# Write your variable ordering code here 
 	# Return an unassigned variable 
+	for var in domain:
+		for value in var:
+			print ("value is : ")
+			print(value)
+			print(domain[value])
 
+
+	for var in domain:
+		for value in domain[var]:
+			print(value)
+			# solution.variable = value
+		# solution.var = domain[var]
+		# print(domain)
+		return(domain)
+	# return solution
+
+	
 	# Suggestions: 
 	# Heuristic 1: minimum remaining values = select variables with fewer values left in domain
 	# Heuristic 2: degree heuristic = select variables related to more constraints
@@ -51,6 +69,9 @@ def custom_value_ordering(state,variable):
 	problem = state.problem
 	domain = state.domain[variable]
 
+	print(domain)
+	for value in domain:
+		print(value)
 	# INSERT CODE HERE
 	# Write your value ordering code here 
 	# Return sorted values, accdg. to some heuristic
