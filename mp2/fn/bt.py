@@ -30,6 +30,18 @@ def custom_variable_selector(state):
 	# Heuristic 2: degree heuristic = select variables related to more constraints
 	# Can use just one heuristic, or chain together heuristics (tie-break)
 
+	unassigned_vars = problem.unassigned_variables(solution)
+
+	# using heuristic 1
+	minimum = unassigned_vars[0]
+
+	if(len(domain[minimum]) == 0):
+		return minimum
+	for var in unassigned_vars:
+		if(len(domain[var]) < len(domain[minimum])):
+			minimum = var
+	return minimum
+
 ### VALUE ORDERING FUNCTIONS ###
 
 def default_order(state,variable):
@@ -61,6 +73,15 @@ def custom_value_ordering(state,variable):
 	# Hint: you will use state.copy() for new_state, use new_state.assign, and use forward_checking() on new_state
 	# Count the number of filtered values by comparing the total from current state and new_state
 
+	pairValue = {}
+	finalDomain = []
+	for value in domain:
+		new_state = state.copy()
+		new_state.assign(value, variable)
+		for var  in problem.unassigned_variables(new_state.solution):
+			forward_checking(new_state, var)
+	return domain
+	
 ### FILTERING FUNCTIONS ###
 
 def do_nothing(state,variable):
