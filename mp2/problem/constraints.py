@@ -140,10 +140,10 @@ class MagicSeries(Constraint):
 		# dont test if not all vars assigned 
 		# return True / False
 		
-		for i, val in enumerate(values):
-			if values.count(i) != val:
-				return False
-
+		if len(self.variables) == len(values):	
+			for i, val in enumerate(values):
+				if values.count(i) != val:
+					return False
 		return True
 
 ### Knapsack Constraints ###
@@ -166,7 +166,6 @@ class KnapsackCapacity(Constraint):
 		for key, item in solution.items():
 			if item:
 				total_weight += key.weight
-
 		return total_weight <= self.capacity
 
 ### Vertex Cover Constraints ###
@@ -189,9 +188,7 @@ class VertexCover(Constraint):
 		active_vertices = []
 		count = 0
 
-		if len(solution.keys()) != len(self.variables):
-			return True
-		else:
+		if len(solution.keys()) == len(self.variables):
 			for key, item in solution.items():
 				if item:
 					active_vertices.append(key)
@@ -202,3 +199,4 @@ class VertexCover(Constraint):
 						count += 1
 						break
 			return count == len(self.edges)
+		return True

@@ -86,23 +86,23 @@ def test3():
     display_solutions(problem,solver)
 
 def test4():
-    problem_name,test_case = 'knapsack',99
-    # problem_name,test_case = 'vertex_cover',99
+    # problem_name,test_case = 'knapsack',99
+    problem_name,test_case = 'vertex_cover',99
 
-    option = 'no_degradation'
-    # option = 'always_improve'
+    # option = 'no_degradation' #hillwalk
+    option = 'always_improve' #hillclimb
 
-    generator_name = 'change1'
+    # generator_name = 'change1'
     # generator_name = 'change2'
     # generator_name = 'swap2'
-    # generator_name = 'custom'
+    generator_name = 'custom'
 
-    solver_name = 'stochastic'
-    # solver_name = 'annealing'
+    # solver_name = 'stochastic'
+    solver_name = 'annealing'
 
-    alpha = 0.50
+    # alpha = 0.50
     # alpha = 0.75
-    # alpha = 0.95
+    alpha = 0.95
 
     config = common_config()
     config.comparison_option = option
@@ -167,7 +167,7 @@ if __name__ == '__main__':
     import time
     start = time.time()
 
-    test = 1
+    test = 3
 
     if test == 1:
         test1()
